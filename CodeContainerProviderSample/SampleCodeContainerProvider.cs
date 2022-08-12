@@ -22,9 +22,12 @@ namespace CodeContainerProviderSample
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
+            // Instead of showing a folder browser dialog here, an implementer might:
+            // - Show UI with list of available containers to download
+            // - await the download of the container
             var acquiredFolder = ShowFolderBrowserDialog(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Simulate Downloading a Code Container");
 
-            if (acquiredFolder != null)
+            if (!string.IsNullOrEmpty(acquiredFolder))
             {
                 string name = Path.GetFileName(acquiredFolder);
                 CodeContainerSourceControlProperties sccProperties = new CodeContainerSourceControlProperties(name, acquiredFolder, Guid);
@@ -33,10 +36,12 @@ namespace CodeContainerProviderSample
                 // You might costruct this if you have a remote URL that this code container exists at
                 RemoteCodeContainer remoteContainer = null;
 
+                // If certain we downloaded the asset, we return a CodeContainer and VS will save the record of it, and open it.
                 return new CodeContainer(localProperties, remoteContainer, isFavorite: false, lastAccessed: DateTimeOffset.UtcNow);
             }
             else
             {
+                // If user cancelled, or download failed, we can return null and VS will keep the "Get to Code" dialog open.
                 return null;
             }
         }
@@ -48,7 +53,10 @@ namespace CodeContainerProviderSample
             throw new NotImplementedException();
         }
 
-        private string ShowFolderBrowserDialog(string initialFolder, string dialogTitle = null)
+        /// <summary>
+        /// Show a VS platform folder browser dialog
+        /// </summary>
+        private string ShowFolderBrowserDialog(string initialFolder, string dialogTitle)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 

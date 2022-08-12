@@ -56,6 +56,9 @@ namespace CodeContainerProviderSample
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
         }
 
+        /// <summary>
+        /// Implement this interface to instantiate and provide our ICodeContainerProvider to VS.
+        /// </summary>
         object IVsPackageExtensionProvider.CreateExtensionInstance(ref Guid extensionPoint, ref Guid instance)
         {
             if (extensionPoint == typeof(ICodeContainerProvider).GUID)
