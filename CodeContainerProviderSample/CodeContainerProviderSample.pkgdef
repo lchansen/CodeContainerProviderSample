@@ -1,0 +1,10 @@
+﻿//=================================================================================================
+// CodeContainerProvider Sample
+//=================================================================================================
+[$RootKey$\CodeContainerProviders]
+[$RootKey$\CodeContainerProviders\{13562B13-0D64-4DEB-9464-6F6202511FA3}]
+"Name"="SampleCodeContainerProvider"
+"PackageGuid"="{1ae44829-0e3c-44fe-89ec-d6b4255094f6}"
+"ImageMoniker"="{ae27a6b0-e345-4288-96df-5eaf394ee369}:1027"
+"DisplayNameResourceId"="#100"
+"DisplayDetailResourceId"="#101"
