@@ -48,8 +48,8 @@ namespace CodeContainerProviderSample
 
         public Task<CodeContainer> AcquireCodeContainerAsync(Microsoft.VisualStudio.Shell.CodeContainerManagement.RemoteCodeContainer onlineCodeContainer, IProgress<ServiceProgressData> downloadProgress, CancellationToken cancellationToken)
         {
-            // This would be called when VS can't find the local path (it may have been deleted),
-            // so this method might be used to re-download and get the new path for the code container.
+            // This would be called when VS can't find the local path. It might have been deleted, or the user logged into VS on a new machine.
+            // This method would be used to re-download and get the new path for the code container.
             throw new NotImplementedException();
         }
 
